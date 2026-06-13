@@ -4,7 +4,7 @@ import QuizPage from "./pages/QuizPage";
 import LoginPage from "./pages/LoginPage";
 
 const App = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   return (
     <Routes>

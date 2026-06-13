@@ -11,6 +11,7 @@ const QuizPage = () => {
     const [answer, setAnswer] = useState(getFromStorage('quiz-answer') || {});
     const [data, setData] = useState([]);
     const [isDone, setIsDone] = useState(false);
+    const [quizKey, setQuizKey] = useState(0);
     const { reviewAnswer, quizResult } = useQuizReview(data, answer)
 
     useEffect(() => {
@@ -31,6 +32,7 @@ const QuizPage = () => {
                         localStorage.removeItem("quiz-data")
                         localStorage.removeItem("quiz-timer")
                         setAnswer({})
+                        setQuizKey(prev => prev + 1)
                     }
                 }
 
@@ -68,7 +70,7 @@ const QuizPage = () => {
                     <QuizResult setIsDone={setIsDone} quizResult={quizResult} />
                     :
                     <div className="flex flex-col gap-6 mt-10 w-full max-w-2xl items-center">
-                        <QuizTimer data={data} answer={answer} setIsDone={setIsDone} />
+                        <QuizTimer key={quizKey} data={data} answer={answer} setIsDone={setIsDone} />
                         <QuestionCard data={data} />
                         <button onClick={handleSubmitAnswer} className="bg-blue-500 text-white px-4 py-2 rounded mt-4 w-xl">Submit</button>
                     </div>

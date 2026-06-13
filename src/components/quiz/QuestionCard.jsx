@@ -27,8 +27,12 @@ const QuestionCard = ({ data }) => {
                     </div>
                     <AnswerOption data={data[currentQuestion]} currentQuestion={currentQuestion} />
                     <div className="flex justify-between w-full">
-                        <button id="previous" onClick={handleMoveToOtherQuestion} className="px-3 py-2 rounded bg-gray-200 text-sm">Previous Question</button>
-                        <button id="next" onClick={handleMoveToOtherQuestion} className="px-3 py-2 rounded bg-gray-200 text-sm">Next Question</button>
+                        <button disabled={currentQuestion === 0} id="previous" onClick={handleMoveToOtherQuestion} className="px-3 py-2 rounded bg-gray-200 text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                            Previous Question
+                        </button>
+                        <button disabled={currentQuestion === data.length - 1} id="next" onClick={handleMoveToOtherQuestion} className="px-3 py-2 rounded bg-gray-200 cursor-pointer text-sm disabled:opacity-50 disabled:cursor-not-allowed">
+                            Next Question
+                        </button>
                     </div>
                 </div>
                 :
