@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useQuizReview } from '../../hooks/useQuizReview'
+import { getFromStorage, saveToStorage } from '../../services/storage'
 
 const QuizTimer = ({ data, answer, setIsDone }) => {
-    const [timer, setTimer] = useState(10 * 60)
+    const [timer, setTimer] = useState(getFromStorage('quiz-timer') || 10 * 60)
     const { reviewAnswer } = useQuizReview(data, answer)
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            setTimer(prev => prev - 1)
+            setTimer(prev => {
+                saveToStorage('quiz-timer', prev - 1)
+                return prev - 1
+            })
         }, 1000);
 
         return () => clearInterval(intervalId);

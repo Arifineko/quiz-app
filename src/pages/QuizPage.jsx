@@ -5,31 +5,24 @@ import { useQuizReview } from "../hooks/useQuizReview";
 import QuizResult from "../components/quiz/QuizResult";
 import QuestionCard from "../components/quiz/QuestionCard";
 import QuizTimer from "../components/quiz/QuizTimer";
-
-
-//data masuk local storage
-//answer masuk
-//{data: [], answer: {}}
-
-export const saveQuizToLocalStorage = (data, answer) => {
-    localStorage.setItem('quiz-data', JSON.stringify({
-        data,
-        answer
-    }))
-}
-
+import { getFromStorage, saveToStorage } from "../services/storage";
 
 const QuizPage = () => {
-    const [answer, setAnswer] = useState({});
+    const [answer, setAnswer] = useState(getFromStorage('quiz-answer') || {});
     const [data, setData] = useState([]);
     const [isDone, setIsDone] = useState(false);
     const { reviewAnswer, quizResult } = useQuizReview(data, answer)
 
     useEffect(() => {
         const loadQuizData = async () => {
+            if (localStorage.getItem('quiz-data')) {
+                const quizData = getFromStorage('quiz-data')
+                setData(quizData);
+                return;
+            }
             const quizData = await getQuizData();
             setData(quizData);
-            saveQuizToLocalStorage(quizData, answer)
+            saveToStorage('quiz-data', quizData)
         };
 
         loadQuizData();
