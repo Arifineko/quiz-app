@@ -28,9 +28,9 @@ const QuizTimer = ({ data, answer, setIsDone }) => {
     const seconds = timer % 60
 
     return (
-        <p className='text-start'>
+        <div className='text-start text-lg p-2 bg-gray-200 rounded-full px-4'>
             {minutes.toString().padStart(2, '0')} : {seconds.toString().padStart(2, '0')}
-        </p>
+        </div>
     )
 }
 

@@ -8,10 +8,10 @@ import QuizTimer from "../components/quiz/QuizTimer";
 import { getFromStorage, removeFromStorage, saveToStorage } from "../services/storage";
 
 const QuizPage = () => {
-    const [answer, setAnswer] = useState(getFromStorage('quiz-answer') || {});
-    const [data, setData] = useState([]);
-    const [isDone, setIsDone] = useState(false);
-    const [quizKey, setQuizKey] = useState(0);
+    const [answer, setAnswer] = useState(getFromStorage('quiz-answer') || {})
+    const [data, setData] = useState([])
+    const [isDone, setIsDone] = useState(true)
+    const [quizKey, setQuizKey] = useState(0)
     const { reviewAnswer, quizResult } = useQuizReview(data, answer)
 
     useEffect(() => {
@@ -62,9 +62,6 @@ const QuizPage = () => {
 
     return (
         <div className="flex flex-col justify-center items-center min-h-screen">
-            <h1 className="text-3xl font-bold">
-                {isDone ? 'Score Result' : 'Welcome to Quiz!'}
-            </h1>
             <AnswerContext.Provider value={{ answer, setAnswer }}>
                 {isDone ?
                     <QuizResult setIsDone={setIsDone} quizResult={quizResult} />
@@ -72,7 +69,7 @@ const QuizPage = () => {
                     <div className="flex flex-col gap-6 mt-10 w-full max-w-2xl items-center">
                         <QuizTimer key={quizKey} data={data} answer={answer} setIsDone={setIsDone} />
                         <QuestionCard data={data} />
-                        <button onClick={handleSubmitAnswer} className="bg-blue-500 text-white px-4 py-2 rounded mt-4 w-xl">Submit</button>
+                        <button onClick={handleSubmitAnswer} className="border p-2 px-10 rounded-2xl mt-4">Submit</button>
                     </div>
                 }
             </AnswerContext.Provider>

@@ -22,15 +22,15 @@ const QuestionCard = ({ data }) => {
             {data.length > 0 ?
                 <div className="flex flex-col gap-6 w-full">
                     <div className="flex flex-col items-center gap-2 text-center w-full">
-                        <p className="text-2xl">{currentQuestion + 1} / {data.length}</p>
-                        <p className="font-semibold">{data[currentQuestion].question}</p>
+                        <p className="text-2xl text-blue-500 font-semibold">{currentQuestion + 1} / {data.length}</p>
+                        <p className="font-semibold text-xl">{data[currentQuestion].question}</p>
                     </div>
                     <AnswerOption data={data[currentQuestion]} currentQuestion={currentQuestion} />
                     <div className="flex justify-between w-full">
-                        <button disabled={currentQuestion === 0} id="previous" onClick={handleMoveToOtherQuestion} className="px-3 py-2 rounded bg-gray-200 text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                        <button disabled={currentQuestion === 0} id="previous" onClick={handleMoveToOtherQuestion} className="px-4 py-2 rounded-lg bg-gray-200 text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
                             Previous Question
                         </button>
-                        <button disabled={currentQuestion === data.length - 1} id="next" onClick={handleMoveToOtherQuestion} className="px-3 py-2 rounded bg-gray-200 cursor-pointer text-sm disabled:opacity-50 disabled:cursor-not-allowed">
+                        <button disabled={currentQuestion === data.length - 1} id="next" onClick={handleMoveToOtherQuestion} className="px-4 py-2 rounded-lg bg-blue-500 text-white cursor-pointer text-sm disabled:opacity-50 disabled:cursor-not-allowed">
                             Next Question
                         </button>
                     </div>

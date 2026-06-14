@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 
 const LoginPage = ({ setIsLogin }) => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
     let navigate = useNavigate();
-    const userName = "admin";
-    const passWord = "123";
+    const userName = "admin"
+    const passWord = "123"
 
     const handleLogin = (e) => {
         e.preventDefault()
@@ -15,17 +15,17 @@ const LoginPage = ({ setIsLogin }) => {
             setIsLogin(true)
             navigate("/quiz")
         } else {
-            alert("Invalid username or password. Please try again.");
+            alert("Invalid username or password. Please try again.")
         }
-    };
+    }
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
             <form
                 onSubmit={handleLogin}
-                className="bg-white p-8 rounded-lg w-full max-w-sm"
+                className="bg-white p-8 rounded-2xl w-full max-w-sm"
             >
-                <h1 className="text-2xl font-bold mb-6 text-center">Login to Start Quiz</h1>
+                <h1 className="text-2xl font-bold mb-6 text-center text-blue-500">Login to Start Quiz</h1>
                 <input
                     type="text"
                     placeholder="Username"

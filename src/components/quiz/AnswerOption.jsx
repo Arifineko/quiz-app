@@ -21,15 +21,19 @@ const AnswerOption = ({ data, currentQuestion }) => {
     return (
         <div key={currentQuestion} className="grid grid-cols-2 gap-6 justify-center">
             {answerOptions.map((option, index) => {
+                const isChecked = answer[currentQuestion] === option
                 return (
-                    <label className="flex items-center gap-2 border p-4 rounded-sm" key={`${option}-${index}`}>
+                    <label
+                        className={`flex items-center gap-2 border-2 p-4 rounded-2xl ${isChecked ? 'bg-blue-100 border-blue-500' : 'bg-white border-gray-300'}`}
+                        key={`${option}-${index}`}
+                    >
                         <input
                             id={`answer-option-${currentQuestion}-${index}`}
                             type="radio"
                             name={`answer-option-${currentQuestion}`}
                             value={option}
                             onChange={handleChooseAnswer}
-                            checked={answer[currentQuestion] === option}
+                            checked={isChecked}
                         />
                         {option}
                     </label>
