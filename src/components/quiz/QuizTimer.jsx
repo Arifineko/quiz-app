@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useQuizReview } from '../../hooks/useQuizReview'
-import { getFromStorage, saveToStorage } from '../../services/storage'
+import { getFromStorage, removeFromStorage, saveToStorage } from '../../services/storage'
 
-const QuizTimer = ({ data, answer, setIsDone }) => {
+const QuizTimer = ({ data, answer, setIsDone, setAnswer, reviewAnswer }) => {
     const [timer, setTimer] = useState(getFromStorage('quiz-timer') || 10 * 60)
-    const { reviewAnswer } = useQuizReview(data, answer)
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -18,11 +16,15 @@ const QuizTimer = ({ data, answer, setIsDone }) => {
     }, [])
 
     useEffect(() => {
-        if (timer === 0) {
+        if (timer <= 0) {
             reviewAnswer()
+            removeFromStorage('quiz-answer')
+            removeFromStorage('quiz-timer')
+            removeFromStorage('quiz-data')
+            setAnswer({})
             setIsDone(true)
         }
-    }, [timer])
+    }, [timer, reviewAnswer, setAnswer, setIsDone])
 
     const minutes = Math.floor(timer / 60)
     const seconds = timer % 60

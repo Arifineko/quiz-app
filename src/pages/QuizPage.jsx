@@ -10,7 +10,7 @@ import { getFromStorage, removeFromStorage, saveToStorage } from "../services/st
 const QuizPage = () => {
     const [answer, setAnswer] = useState(getFromStorage('quiz-answer') || {})
     const [data, setData] = useState([])
-    const [isDone, setIsDone] = useState(true)
+    const [isDone, setIsDone] = useState(false)
     const [quizKey, setQuizKey] = useState(0)
     const { reviewAnswer, quizResult } = useQuizReview(data, answer)
 
@@ -67,7 +67,7 @@ const QuizPage = () => {
                     <QuizResult setIsDone={setIsDone} quizResult={quizResult} />
                     :
                     <div className="flex flex-col gap-6 mt-10 w-full max-w-2xl items-center">
-                        <QuizTimer key={quizKey} data={data} answer={answer} setIsDone={setIsDone} />
+                        <QuizTimer key={quizKey} data={data} answer={answer} setAnswer={setAnswer} setIsDone={setIsDone} reviewAnswer={reviewAnswer} />
                         <QuestionCard data={data} />
                         <button onClick={handleSubmitAnswer} className="border p-2 px-10 rounded-2xl mt-4">Submit</button>
                     </div>
